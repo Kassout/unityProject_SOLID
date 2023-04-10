@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
     private PlayerMovement _playerMovement;
     private PlayerRenderer _playerRenderer;
     private PlayerAIInteractions _playerAIInteractions;
-    private PlayerInput _playerInput;
+    private IPlayerInput _playerInput;
     private PlayerAnimations _playerAnimations;
 
     public UIController uiController;
@@ -17,7 +16,7 @@ public class Player : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         _playerRenderer = GetComponent<PlayerRenderer>();
         _playerAIInteractions = GetComponent<PlayerAIInteractions>();
-        _playerInput = GetComponent<PlayerInput>();
+        _playerInput = GetComponent<IPlayerInput>();
 
         _playerInput.OnInteractEvent += () => _playerAIInteractions.Interact(_playerRenderer.IsSpriteFlipped);
     }

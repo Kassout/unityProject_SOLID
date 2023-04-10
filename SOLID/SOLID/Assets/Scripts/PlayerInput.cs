@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInput : MonoBehaviour, IPlayerInput
 {
     public Vector2 MovementInput { get; private set; }
-
     public event Action OnInteractEvent;
 
     private void Update()
