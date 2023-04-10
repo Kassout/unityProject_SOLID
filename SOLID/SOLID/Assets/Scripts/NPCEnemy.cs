@@ -1,4 +1,6 @@
-﻿public class NPCEnemy : NPC
+﻿using UnityEngine;
+
+public class NPCEnemy : NPC, IHittable
 {
     public string text = "I deal 10 physical damage    ( •̀ᴗ•́ )و ̑̑ ";
 
@@ -12,5 +14,10 @@
     protected override string GetText()
     {
         return text;
+    }
+
+    public void GetHit()
+    {
+        Debug.Log("Ouch!");
     }
 }
