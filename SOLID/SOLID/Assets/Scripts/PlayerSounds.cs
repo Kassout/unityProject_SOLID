@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayeSounds : MonoBehaviour
+public class PlayerSounds : MonoBehaviour
 {
     public AudioSource audioSource;
     public void PlayStepSound()

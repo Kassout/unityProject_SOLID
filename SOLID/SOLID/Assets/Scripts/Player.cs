@@ -7,12 +7,10 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public Animator playerAnimator;
-    public SpriteRenderer playerRenderer;
-
-    public Transform raycastPoint;
-
-    [SerializeField] 
-    private PlayerMovement playerMovement;
+    
+    private PlayerMovement _playerMovement;
+    private PlayerRenderer _playerRenderer;
+    private PlayerAIInteractions _playerAIInteractions;
     
     public GameObject ui_window;
     
@@ -20,8 +18,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
-        SceneManager.LoadScene("PremadeLevel", LoadSceneMode.Additive);
+        _playerMovement = GetComponent<PlayerMovement>();
+        _playerRenderer = GetComponent<PlayerRenderer>();
+        _playerAIInteractions = GetComponent<PlayerAIInteractions>();
     }
     private void Update()
     {
@@ -29,7 +28,7 @@ public class Player : MonoBehaviour
         movementVector.Normalize();
         if (Input.GetAxisRaw("Fire1") > 0)
         {
-            Interact();
+            _playerAIInteractions.Interact(_playerRenderer.IsSpriteFlipped);
         }
     }
 
@@ -46,43 +45,18 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Interact()
-    {
-        Debug.DrawRay(raycastPoint.position, playerRenderer.flipX ? Vector3.left : Vector3.right, Color.red);
-        RaycastHit2D hit = Physics2D.Raycast(raycastPoint.position, playerRenderer.flipX ? Vector3.left : Vector3.right,1);
-        if(hit.collider != null)
-        {
-            if (hit.collider.GetComponent<NPC_Enemy>())
-            {
-                hit.collider.GetComponent<NPC_Enemy>().GetHit();
-            }
-            else if (hit.collider.GetComponent<NPC_Friendly>())
-            {
-                hit.collider.GetComponent<NPC_Friendly>().Talk();
-            }
-        }
-
-    }
-
     private void MovePlayer(Vector2 movementVector)
     {
         playerAnimator.SetBool("Walk", true);
-        playerMovement.MovePlayer(movementVector);
-        
-        if (Mathf.Abs(movementVector.x) > 0.1f)
-            playerRenderer.flipX = Vector3.Dot(transform.right, movementVector) < 0;
+        _playerMovement.MovePlayer(movementVector);
+
+        _playerRenderer.RenderPlayer(movementVector);
     }
 
     public void ReceiveDamaged()
     {
-        StopAllCoroutines();
-        StartCoroutine(FlashRed());
+        _playerRenderer.FlashRed();
     }
 
-    private IEnumerator FlashRed()
-    {
-        playerRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        playerRenderer.color = Color.white;
-    }
+
 }
