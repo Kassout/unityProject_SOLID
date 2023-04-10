@@ -1,16 +1,16 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
-
-public class NPCEnemy : MonoBehaviour
+﻿public class NPCEnemy : NPC
 {
-    public UnityEvent<string> OnSpeak;
-    public AudioSource audioSource;
     public string text = "I deal 10 physical damage    ( •̀ᴗ•́ )و ̑̑ ";
 
-    public void GetHit()
+    public override void Interact()
     {
-        OnSpeak?.Invoke(text);
-        audioSource.Play();
+        base.Interact();
+        
         FindObjectOfType<Player>().ReceiveDamaged();
+    }
+
+    protected override string GetText()
+    {
+        return text;
     }
 }
