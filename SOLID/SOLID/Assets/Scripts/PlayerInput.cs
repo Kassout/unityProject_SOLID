@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Vector2 MovementInput { get; private set; }
+
+    public event Action OnInteractEvent;
+
+    private void Update()
     {
-        
+        GetInteractInput();
+        GetMovementInput();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void GetMovementInput()
     {
-        
+        MovementInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        MovementInput.Normalize();
+    }
+
+    private void GetInteractInput()
+    {
+        if (Input.GetAxisRaw("Fire1") > 0)
+        {
+            OnInteractEvent?.Invoke();
+        }
     }
 }

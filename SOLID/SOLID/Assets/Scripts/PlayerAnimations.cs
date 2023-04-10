@@ -1,18 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] 
+    private Animator playerAnimator;
 
-    // Update is called once per frame
-    void Update()
+    public void SetupAnimations(Vector2 movement)
     {
-        
+        if (movement.magnitude > 0)
+        {
+            playerAnimator.SetBool("Walk", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("Walk", false);
+        }
     }
 }

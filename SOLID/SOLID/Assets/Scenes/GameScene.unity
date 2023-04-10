@@ -973,9 +973,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 815885425}
-  raycastPoint: {fileID: 1706832592}
-  playerMovement: {fileID: 837455035}
-  playerRenderer: {fileID: 815885426}
   ui_window: {fileID: 614753882}
 --- !u!82 &837455034
 AudioSource:
@@ -1135,6 +1132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7169d424f5174e441a0d1fddfdc9e9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastPoint: {fileID: 1706832592}
 --- !u!1 &844677121
 GameObject:
   m_ObjectHideFlags: 0
