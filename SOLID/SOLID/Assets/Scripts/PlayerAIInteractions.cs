@@ -11,13 +11,13 @@ public class PlayerAIInteractions : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(raycastPoint.position, isSpriteFlipped ? Vector3.left : Vector3.right,1);
         if(hit.collider != null)
         {
-            if (hit.collider.GetComponent<NPC_Enemy>())
+            if (hit.collider.GetComponent<NPCEnemy>())
             {
-                hit.collider.GetComponent<NPC_Enemy>().GetHit();
+                hit.collider.GetComponent<NPCEnemy>().GetHit();
             }
-            else if (hit.collider.GetComponent<NPC_Friendly>())
+            else if (hit.collider.GetComponent<NPCFriendly>())
             {
-                hit.collider.GetComponent<NPC_Friendly>().Talk();
+                hit.collider.GetComponent<NPCFriendly>().Talk();
             }
         }
     }

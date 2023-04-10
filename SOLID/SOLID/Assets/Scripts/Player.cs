@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -7,8 +8,8 @@ public class Player : MonoBehaviour
     private PlayerAIInteractions _playerAIInteractions;
     private PlayerInput _playerInput;
     private PlayerAnimations _playerAnimations;
-    
-    public GameObject ui_window;
+
+    public UIController uiController;
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
         
         if (_playerInput.MovementInput.magnitude > 0)
         {
-            ui_window.SetActive(false);
+            uiController.ToggleUI(false);
         }
     }
     
